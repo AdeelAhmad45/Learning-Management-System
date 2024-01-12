@@ -59,12 +59,13 @@ const login = async(req, res, next) => {
      }
  
      const user = await User.findOne({ email }).select("+password")
+     console.log(user);
  
-     if (!user || user.comparePassword(password)) {
+     if (!user || !user.comparePassword(password)) {
          return next(new AppError("Email or password does not match", 400))
      }
  
-     const token = await generateJWTToken();
+     const token = await user.generateJWTToken();
  
      user.password = undefined;
  
