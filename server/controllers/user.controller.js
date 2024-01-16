@@ -1,7 +1,7 @@
 import User from "../models/user.model.js";
 import AppError from "../utils/error.util.js";
 import cloudinary from 'cloudinary';
-import fs, { appendFile } from 'fs/promises';
+import fs from 'fs/promises';
 import sendEmail from "../utils/sendEmail.js";
 
 const cookieOption = {
