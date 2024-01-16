@@ -1,7 +1,7 @@
 import User from "../models/user.model.js";
 import AppError from "../utils/error.util.js";
 import cloudinary from 'cloudinary';
-import fs from 'fs/promises';
+import fs, { appendFile } from 'fs/promises';
 import sendEmail from "../utils/sendEmail.js";
 
 const cookieOption = {
@@ -228,11 +228,48 @@ const resetPassword = async(req, res, next) => {
     });
 }
 
+const changePassword = async(req, res, next) => {
+    const { oldPassword, newPassword } = req.body;
+    const { id } = req.user;
+
+    if (!oldPassword || !newPassword) {
+        return next(new AppError("Every fields are required"));
+    }
+
+    const user = User.findById(id).select('+password');
+
+    if (!user) {
+        return next(
+            new AppError("User does not exist", 400)
+        )
+    }
+
+    const isPasswordValid = await user.comparePassword(oldPassword);
+
+    if (!isPasswordValid) {
+        return next(
+            new AppError("old password is invalid", 400)
+        )
+    }
+
+    user.password = newPassword;
+
+    await user.save();
+
+    user.password = undefined;
+
+    res.status(200).json({
+        success: true,
+        message: 'Password changed successfully'
+    })
+} 
+
 export {
     register,
     login,
     logout,
     getProfile,
     forgotPassword,
-    resetPassword
+    resetPassword,
+    changePassword
 }
