@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { createCourse, getAllCourses, getLecturesByCourseId, removeCourse, updateCourse } from "../controllers/course.controller.js";
+import { addLectureToCourseById, createCourse, getAllCourses, getLecturesByCourseId, removeCourse, updateCourse } from "../controllers/course.controller.js";
 import { autorizedRoles, isLoggedIn } from "../middlewares/auth.middleware.js";
 import upload from "../middlewares/multer.middleware.js";
 
@@ -25,6 +25,12 @@ router.route('/:id')
         isLoggedIn, 
         autorizedRoles('ADMIN'),
         removeCourse
+        )
+        .post(
+            isLoggedIn, 
+            autorizedRoles('ADMIN'),
+            upload.single('lecture'),
+            addLectureToCourseById
         );
 
 export default router;

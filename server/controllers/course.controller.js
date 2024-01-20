@@ -151,10 +151,73 @@ const removeCourse = async(req, res, next) => {
     }
 }
 
+const addLectureToCourseById = async(req, res, next) => {
+   try {
+     const { title, description } = req.body;
+     const { id } = req.params;
+ 
+     if (!title || !description) {
+         return next(
+             new AppError("All fields are required", 400)
+         )
+     }
+ 
+     const course = await Course.findById(id);
+ 
+     if (!course) {
+         return next(
+             new AppError("Course does not exist", 400)
+         )
+     }
+ 
+     const lectureData = {
+         title,
+         description,
+         lecture: {}
+     }
+ 
+     if (req.file) {
+         try {
+             const result = await cloudinary.v2.uploader.upload(req.file.path, {
+                 folder: 'lms'
+             });
+                
+             if (result) {
+                 lectureData.lecture.public_id = result.public_id;
+                 lectureData.lecture.secure_url = result.secure_url;
+             }
+     
+             fs.rm(`uploads/${req.file.filename}`);
+         } catch (error) {
+             return next(
+                 new AppError(error.message, 500)
+             )
+         }
+     }
+ 
+     course.lecture.push(lectureData);
+     course.numbersOfLectures = course.lecture.length;
+ 
+     await course.save();
+ 
+     res.status(200).json({
+         success: true,
+         message: "Lectures successfully added to the course",
+         course
+     })
+     
+   } catch (error) {
+        return next(
+            new AppError(error.message, 500)
+        )
+   }
+}
+
 export {
     getAllCourses,
     getLecturesByCourseId,
     createCourse,
     updateCourse,
-    removeCourse
+    removeCourse,
+    addLectureToCourseById
 }
