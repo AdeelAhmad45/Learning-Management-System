@@ -1,12 +1,15 @@
 import './App.css'
 import './index.css'
+import { Routes } from 'react-router-dom'
 
 function App() {
   
 
   return (
     <>
-    <h1>lms</h1>
+      <Routes>
+
+      </Routes>
     </>
   )
 }
