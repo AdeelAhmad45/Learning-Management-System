@@ -24,7 +24,7 @@ function HomePage() {
                         </button>
                     </Link>
                     <Link to="/courses">
-                        <button className="border-[#2B59CE] bg-white font-semibold cursor-pointer text-lg text-[#2525AD] px-5 py-3 rounded-md hover:bg-[#2B59CE] hover:text-white transition-all ease-in-out duration-300">
+                        <button className="border-[#2B59CE] border-2 bg-white font-semibold cursor-pointer text-lg text-[#2525AD] px-5 py-3 rounded-md hover:bg-[#2B59CE] hover:text-white transition-all ease-in-out duration-300">
                             Contact Us
                         </button>
                     </Link>
