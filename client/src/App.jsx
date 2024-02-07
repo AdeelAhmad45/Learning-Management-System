@@ -13,6 +13,7 @@ import Denied from './pages/Denied'
 import CourseDescription from './pages/course/CourseDescription'
 import RequireAuth from './component/Auth/RequireAuth'
 import CreateCourse from './pages/course/CreateCourse'
+import Profile from './pages/user/Profile'
 
 function App() {
   
@@ -32,6 +33,10 @@ function App() {
 
           <Route element={<RequireAuth allowedRoles={["ADMIN"]} />}>
           <Route path='/courses/create' element={<CreateCourse />}></Route>
+          </Route>
+
+          <Route element={<RequireAuth allowedRoles={["ADMIN", "USER"]} />}>
+            <Route path='/user/profile' element={<Profile />}></Route>
           </Route>
 
           <Route path='*' element={<NotFound />}></Route>
