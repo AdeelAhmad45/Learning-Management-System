@@ -5,7 +5,7 @@ import fs from "fs/promises";
 
 const getAllCourses = async(req, res, next) => {
     try {
-        const courses = await Course.find({}).select('-lecture')
+        const courses = await Course.find({}).select('-lectures')
     
         res.status(200).json({
             success: true,
@@ -33,7 +33,7 @@ const getLecturesByCourseId = async(req, res, next) => {
         res.status(200).json({
             success: true,
             message: 'Course lectures fetch successfully',
-            lecture: course.lecture
+            lectures: course.lectures
         })
     } catch (e) {
         return next(
@@ -195,8 +195,8 @@ const addLectureToCourseById = async(req, res, next) => {
          }
      }
  
-     course.lecture.push(lectureData);
-     course.numbersOfLectures = course.lecture.length;
+     course.lectures.push(lectureData);
+     course.numbersOfLectures = course.lectures.length;
  
      await course.save();
  

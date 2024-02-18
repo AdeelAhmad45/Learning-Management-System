@@ -28,7 +28,7 @@ const courseSchema = new Schema({
             required: true,
         }
     },
-    lecture: [
+    lectures: [
         {
             title: String,
             description: String,
