@@ -32,7 +32,7 @@ function DisplayLectures() {
         </div>
 
         {/* left section for playing videos and displaying course details to admin */}
-        {lectures && lectures.length > 0 && <div className="flex justify-center gap-10 w-full">
+        {(lectures && lectures.length > 0) ? (<div className="flex justify-center gap-10 w-full">
           <div className="space-y-5 w-[28rem] p-2 rounded-lg shadow-[0_0_10px_#2525AD]">
             <video 
               src={lectures && lectures[currentVideo]?.lecture?.secure_url}
@@ -66,7 +66,7 @@ function DisplayLectures() {
             <li className="flex font-semibold text-xl items-center justify-between text-[#2525AD]">
               <p>lectures list</p>
               {role === "ADMIN" && (
-                <button onClick={() => navigate("/course/addlecture", {state: {...state}})} className="rounded-md text-sm left-0 bottom-0 bg-[#2525AD] text-white hover:bg-[#2B59CE]  transition-all ease-in-out duration-300 font-semibold py-1 px-2 cursor-pointer text-center">Add new lecture</button>
+                <button onClick={() => navigate("/courses/addlecture", {state: {...state}})} className="rounded-md text-sm left-0 bottom-0 bg-[#2525AD] text-white hover:bg-[#2B59CE]  transition-all ease-in-out duration-300 font-semibold py-1 px-2 cursor-pointer text-center">Add new lecture</button>
               )}
             </li>
             {
@@ -87,7 +87,9 @@ function DisplayLectures() {
               })
             }
           </ul>
-        </div>}
+        </div>) : ( role === "ADMIN" && (
+                <button onClick={() => navigate("/courses/addlecture", {state: {...state}})} className="rounded-md text-sm left-0 bottom-0 bg-[#2525AD] text-white hover:bg-[#2B59CE]  transition-all ease-in-out duration-300 font-semibold py-1 px-2 cursor-pointer text-center">Add new lecture</button>
+              ))}
       </div>
     </HomeLayout>
   )
