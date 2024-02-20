@@ -179,8 +179,10 @@ const addLectureToCourseById = async(req, res, next) => {
      if (req.file) {
          try {
              const result = await cloudinary.v2.uploader.upload(req.file.path, {
-                 folder: 'lms'
-             });
+                folder: 'lms', // Save files in a folder named lms
+                chunk_size: 50000000, // 50 mb size
+                resource_type: 'video',
+              });
                 
              if (result) {
                  lectureData.lecture.public_id = result.public_id;
