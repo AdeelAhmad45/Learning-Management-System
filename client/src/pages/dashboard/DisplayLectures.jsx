@@ -27,13 +27,13 @@ function DisplayLectures() {
   return (
     <HomeLayout>
       <div className="flex flex-col text-black min-h-[90vh] gap-10 items-center justify-center py-10  mx-[5%]">
-        <div className="text-2xl text-[#2525AD] font-semibold">
+        <div className="text-xl text-[#2525AD] mt-5 p-3 font-semibold">
         course name: {state?.title}
         </div>
 
         {/* left section for playing videos and displaying course details to admin */}
-        {(lectures && lectures.length > 0) ? (<div className="flex justify-center gap-10 w-full">
-          <div className="space-y-5 w-[28rem] p-2 rounded-lg shadow-[0_0_10px_#2525AD]">
+        {(lectures && lectures.length > 0) ? (<div className="flex flex-wrap justify-center gap-10 w-full">
+          <div className="space-y-5 w-[45rem] p-2 rounded-lg shadow-[0_0_10px_#2525AD]">
             <video 
               src={lectures && lectures[currentVideo]?.lecture?.secure_url}
               className="object-fill rounded-tl-lg rounded-tr-lg w-full"

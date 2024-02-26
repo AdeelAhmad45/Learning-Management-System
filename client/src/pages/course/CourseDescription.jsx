@@ -11,10 +11,10 @@ function CourseDescription() {
     return(
             <HomeLayout>
                 <div className="flex flex-col min-h-[87vh] pt-12 px-20 items-center justify-center text-black">
-                    <div className="flex flex-row gap-14 py-10 relative">
+                    <div className="flex flex-wrap flex-row gap-14 py-10 relative">
                         <div className="space-y-5">
                             <img
-                                className="w-full h-64" 
+                                className="w-full h-34 sm:h-64" 
                                 alt="thumbnail"
                                 src={state?.thumbnail?.secure_url}
                             />
