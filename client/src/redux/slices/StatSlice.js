@@ -3,7 +3,7 @@ import toast from "react-hot-toast";
 import axiosInstance from "../../helpers/AxiosInstance";
 
 const initialState = {
-    allUserCount: 0,
+    allUsersCount: 0,
     subscribedCount: 0
 }
 
@@ -30,7 +30,7 @@ const statSlice = createSlice({
     extraReducers: (builder) => {
         builder.addCase(getStatData.fulfilled, (state, action) => {
             console.log(action);
-            state.allUserCount = action?.payload?.allUserCount;
+            state.allUsersCount = action?.payload?.allUsersCount;
             state.subscribedCount = action?.payload?.subscribedUsersCount;
 
         })
