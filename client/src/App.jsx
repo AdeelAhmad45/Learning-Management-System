@@ -30,7 +30,7 @@ function App() {
       <Routes>
           <Route path='/' element={<HomePage />}></Route>
           <Route path='/about' element={<AboutUs />}></Route>
-          <Route path='https://learning-management-system-liart.vercel.app/courses' element={<CourseList />}></Route>
+          <Route path='/courses' element={<CourseList />}></Route>
           <Route path='/contact' element={<Contact />}></Route>
           <Route path='/denied' element={<Denied />}></Route>
           <Route path='/courses/description' element={<CourseDescription />}></Route>
