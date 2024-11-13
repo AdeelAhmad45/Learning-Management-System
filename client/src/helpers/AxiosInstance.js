@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BASE_URL = 'https://learning-management-system-2-xhu6.onrender.com/api/v1';
+const BASE_URL = 'https://learning-management-system-2-xhu6.onrender.com';
 
 const axiosInstance = axios.create();
 
